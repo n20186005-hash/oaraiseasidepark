@@ -1,0 +1,10 @@
+{
+  "name": "大洗海浜公園ガイド",
+  "short_name": "大洗海浜公園",
+  "lang": "ja",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f6f3eb",
+  "theme_color": "#0d5160",
+  "icons": []
+}

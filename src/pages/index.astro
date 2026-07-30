@@ -1,0 +1,342 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import MemorialCard from '@/components/MemorialCard.astro';
+
+const title = '大洗海浜公園｜海辺の散歩・アクセス・周辺グルメガイド';
+const description = '茨城県大洗町の大洗海浜公園を楽しむための非公式ガイド。海辺の過ごし方、電車・車でのアクセス、駐車場、周辺グルメ、近隣スポット、端末内で作れる旅の記念カードを紹介します。';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'TouristAttraction',
+  name: '大洗海浜公園',
+  alternateName: 'Oarai Seaside Park',
+  description,
+  address: {
+    '@type': 'PostalAddress',
+    postalCode: '311-1305',
+    addressRegion: '茨城県',
+    addressLocality: '東茨城郡大洗町',
+    streetAddress: '港中央',
+    addressCountry: 'JP',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 36.3044132,
+    longitude: 140.5664618,
+  },
+  isAccessibleForFree: true,
+  publicAccess: true,
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+  <header class="site-header" data-header>
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="大洗海浜公園ガイド トップへ">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M5 28c6-7 12-7 18 0s12 7 20 0"/><circle cx="33" cy="16" r="5"/></svg>
+        </span>
+        <span><strong>大洗海浜公園</strong><small>OARAI KAIHIN PARK</small></span>
+      </a>
+      <nav class="desktop-nav" aria-label="ページ内ナビゲーション">
+        <a href="#enjoy">楽しみ方</a>
+        <a href="#food">周辺グルメ</a>
+        <a href="#access">アクセス</a>
+        <a href="#nearby">周辺スポット</a>
+        <a class="nav-cta" href="#memory-card">記念カード</a>
+      </nav>
+      <details class="mobile-menu">
+        <summary aria-label="メニューを開く"><span></span><span></span><span></span></summary>
+        <nav aria-label="モバイルナビゲーション">
+          <a href="#enjoy">楽しみ方</a>
+          <a href="#food">周辺グルメ</a>
+          <a href="#access">アクセス</a>
+          <a href="#nearby">周辺スポット</a>
+          <a href="#memory-card">記念カード</a>
+        </nav>
+      </details>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <img class="hero-image" src="/images/hero-oarai.webp" alt="大洗の海辺から望む太平洋の日の出" width="1920" height="1080" fetchpriority="high" />
+      <div class="hero-shade"></div>
+      <div class="hero-grain"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">IBARAKI · OARAI · PACIFIC COAST</p>
+        <h1 id="hero-title">海と港のあいだで、<br /><em>深呼吸する休日。</em></h1>
+        <p class="hero-copy">広い芝生、潮風の遊歩道、その先に続く大洗サンビーチ。朝の散歩から夕暮れまで、予定を詰め込まずに過ごせる海辺の公園です。</p>
+        <div class="hero-actions">
+          <a class="primary-button" href="#access">行き方を見る</a>
+          <a class="ghost-button" href="#memory-card">記念カードを作る</a>
+        </div>
+      </div>
+      <div class="hero-facts" aria-label="基本情報">
+        <div><span>OPEN</span><strong>常時利用可</strong></div>
+        <div><span>ADMISSION</span><strong>入園無料</strong></div>
+        <div><span>FROM STATION</span><strong>徒歩 約20分</strong></div>
+        <div><span>LOCATION</span><strong>大洗町 港中央</strong></div>
+      </div>
+      <a class="scroll-cue" href="#overview" aria-label="概要へスクロール"><span>SCROLL</span><i></i></a>
+    </section>
+
+    <section id="overview" class="intro section-shell">
+      <div class="intro-title-block">
+        <span class="vertical-label">OARAI SEASIDE</span>
+        <div>
+          <div class="section-kicker">ABOUT THE PARK</div>
+          <h2 class="section-title">海辺の日常を、<br />ゆっくり味わう場所。</h2>
+        </div>
+      </div>
+      <div class="intro-copy">
+        <p>大洗海浜公園は、大洗港のマリーナ地区に整備された開放的な海辺の公園です。芝生広場、遊歩道、多目的広場、休憩スペースがまとまり、隣接する大洗サンビーチと一続きのように楽しめます。</p>
+        <p>海水浴だけを目的にせず、散歩、ピクニック、港の眺め、親子の外遊びなど、季節に合わせて自由に過ごせるのが魅力。マリンタワーやシーサイドステーションにも近く、大洗観光の起点にも向いています。</p>
+        <div class="review-note"><span>情報確認日</span><strong>2026.07.30</strong><small>季節設備・駐車料金・催事は来訪前に最新案内をご確認ください。</small></div>
+      </div>
+    </section>
+
+    <section class="photo-band" aria-label="大洗港の風景">
+      <img src="/images/oarai-port-wide.webp" alt="大洗港と太平洋を見渡す風景" width="1600" height="900" loading="lazy" />
+      <div class="photo-band-caption"><span>PORT &amp; HORIZON</span><strong>港の動きと、水平線の静けさ。</strong></div>
+    </section>
+
+    <section id="enjoy" class="section-shell enjoy-section" aria-labelledby="enjoy-title">
+      <div class="section-heading-row">
+        <div>
+          <div class="section-kicker">HOW TO SPEND</div>
+          <h2 id="enjoy-title" class="section-title">公園での過ごし方</h2>
+        </div>
+        <p class="section-lead">派手なアトラクションではなく、海辺の余白を楽しむ場所。時間帯と季節で表情が変わります。</p>
+      </div>
+      <div class="experience-grid">
+        <article class="experience-card large-card">
+          <div class="card-number">01</div>
+          <div class="experience-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="18" r="8"/><path d="M7 35c7-7 12-7 18 0s11 7 16 1"/></svg></div>
+          <h3>朝の海辺を歩く</h3>
+          <p>東向きの海岸では、空がゆっくり明るくなる時間が格別。風の弱い日は水面の光を眺めながら、遊歩道を無理なく歩けます。</p>
+          <span class="time-tag">おすすめ：日の出前後</span>
+        </article>
+        <article class="experience-card image-card">
+          <img src="/images/sun-beach-card.webp" alt="大洗の海岸と朝日" width="1200" height="900" loading="lazy" />
+          <div class="image-card-overlay"><span>02</span><h3>サンビーチへ足を延ばす</h3><p>広い砂浜と遠浅の海。遊泳は指定期間・区域を守り、風と波の状況を確認して楽しみましょう。</p></div>
+        </article>
+        <article class="experience-card">
+          <div class="card-number">03</div>
+          <div class="experience-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 34h32M13 28h22M17 22h14M22 10h4v12"/><path d="M10 38c7-5 13-5 20 0"/></svg></div>
+          <h3>芝生でひと休み</h3>
+          <p>レジャーシートと飲み物があれば十分。強い日差しと海風に備え、帽子や羽織りものも用意すると快適です。</p>
+          <span class="time-tag">おすすめ：春・秋</span>
+        </article>
+        <article class="experience-card">
+          <div class="card-number">04</div>
+          <div class="experience-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="13" width="32" height="24" rx="3"/><circle cx="24" cy="25" r="7"/><path d="M16 13l3-4h10l3 4"/></svg></div>
+          <h3>海辺の写真を残す</h3>
+          <p>朝は青と金、夕方は砂色と橙色。水平線をまっすぐ入れるだけでも、大洗らしい一枚になります。</p>
+          <a href="#memory-card" class="inline-link">写真を記念カードにする <span>→</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="season-section">
+      <div class="section-shell">
+        <div class="section-heading-row light-heading">
+          <div><div class="section-kicker">SEASONS</div><h2 class="section-title">四季の海辺メモ</h2></div>
+          <p class="section-lead">同じ公園でも、装備と楽しみ方は季節ごとに少しずつ変わります。</p>
+        </div>
+        <div class="season-grid">
+          <article><span>春</span><h3>潮の時間を調べて</h3><p>サンビーチで潮干狩りを楽しむ場合は、採取区域・道具・貝の大きさなど現地ルールを事前に確認。</p></article>
+          <article><span>夏</span><h3>遊泳区域を守る</h3><p>2026年の海水浴場開設は7月18日〜8月16日。日陰、水分、サンダルの熱さにも注意。</p></article>
+          <article><span>秋</span><h3>空の広さを楽しむ</h3><p>散歩とピクニックに向く季節。イベント開催日は駐車場や周辺道路が混み合うことがあります。</p></article>
+          <article><span>冬</span><h3>防風をしっかり</h3><p>日の出と澄んだ水平線が魅力。海風は体感温度を下げるため、手袋や防風アウターがあると安心。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="food" class="section-shell food-section" aria-labelledby="food-title">
+      <div class="section-heading-row">
+        <div><div class="section-kicker">LOCAL FOOD</div><h2 id="food-title" class="section-title">周辺グルメ</h2></div>
+        <p class="section-lead">海辺の散歩の前後に立ち寄りやすい店を中心に、大洗らしい魚介とローカルフードを選びました。</p>
+      </div>
+      <div class="food-grid">
+        <article class="food-card featured-food">
+          <div class="food-visual fish-pattern"><span>SEAFOOD</span></div>
+          <div class="food-card-body"><div class="food-meta"><span>近さ重視</span><span>シーサイドステーション</span></div><h3>お魚天国 大洗浜っこ食堂</h3><p>海鮮丼、釜揚げしらす丼、鮭親子丼など、海辺らしい丼ものが中心。テラス席を利用できる日もあります。</p><strong>おすすめ：海鮮丼・釜揚げしらす丼</strong></div>
+        </article>
+        <article class="food-card">
+          <div class="food-card-body"><div class="food-meta"><span>漁港エリア</span><span>地魚</span></div><h3>大洗漁協直営 かあちゃんの店</h3><p>漁師の家族が振る舞う、港町らしい定食の人気店。水揚げ状況に合った旬の魚を味わえます。</p><strong>おすすめ：生しらす丼・旬のお刺身定食</strong></div>
+        </article>
+        <article class="food-card">
+          <div class="food-card-body"><div class="food-meta"><span>漁港エリア</span><span>通年</span></div><h3>大洗海鮮市場 海鮮どんぶり亭</h3><p>海鮮市場に併設。種類豊富な海鮮丼や煮魚・焼魚の定食、冬は大洗名物のあんこう料理も。</p><strong>おすすめ：スペシャル海鮮丼・冬のあんこう鍋</strong></div>
+        </article>
+        <article class="food-card accent-food">
+          <div class="food-card-body"><div class="food-meta"><span>気軽な軽食</span><span>港中央</span></div><h3>大洗海の家 manoMano</h3><p>魚介以外も食べたい日に。潮風を感じるロケーションで、茨城県産の常陸牛を使ったメニューを楽しめます。</p><strong>おすすめ：常陸牛バーガー</strong></div>
+        </article>
+      </div>
+      <p class="section-footnote">※ 営業時間・定休日・提供メニューは季節や仕入れで変わります。訪問当日に各店の最新情報をご確認ください。</p>
+    </section>
+
+    <section id="access" class="access-section" aria-labelledby="access-title">
+      <div class="section-shell">
+        <div class="section-heading-row light-heading">
+          <div><div class="section-kicker">ACCESS</div><h2 id="access-title" class="section-title">詳細交通</h2></div>
+          <div class="address-chip"><span>〒311-1305</span><strong>茨城県東茨城郡大洗町港中央</strong><button type="button" data-copy-address>住所をコピー</button></div>
+        </div>
+
+        <div class="access-layout">
+          <div class="route-panel">
+            <div class="route-tabs" role="tablist" aria-label="交通手段">
+              <button type="button" role="tab" aria-selected="true" data-route-tab="train">電車</button>
+              <button type="button" role="tab" aria-selected="false" data-route-tab="car">車</button>
+              <button type="button" role="tab" aria-selected="false" data-route-tab="bus">町内移動</button>
+            </div>
+            <div class="route-content" data-route-panel="train">
+              <ol class="route-steps">
+                <li><span class="route-dot">1</span><div><small>東京・上野から</small><h3>JR常磐線 特急で水戸駅へ</h3><p>所要の目安：約75〜80分。週末や連休は指定席の事前確保が安心です。</p></div></li>
+                <li><span class="route-dot">2</span><div><small>水戸駅から</small><h3>鹿島臨海鉄道 大洗鹿島線</h3><p>大洗駅まで約15分。大洗鹿島線ではSuicaなどの交通系ICカードは利用できないため、現金・乗車券を準備してください。</p></div></li>
+                <li><span class="route-dot">3</span><div><small>大洗駅から</small><h3>徒歩 約18〜20分</h3><p>駅から港中央方面へ約1.5km。荷物が多い日や悪天候時はタクシーが便利です。</p></div></li>
+              </ol>
+            </div>
+            <div class="route-content" data-route-panel="car" hidden>
+              <ol class="route-steps">
+                <li><span class="route-dot">1</span><div><small>高速道路</small><h3>東水戸道路「水戸大洗IC」へ</h3><p>常磐自動車道・北関東自動車道方面から東水戸道路へ接続します。</p></div></li>
+                <li><span class="route-dot">2</span><div><small>一般道</small><h3>国道51号を大洗方面へ</h3><p>ICから公園までは通常約10分。イベント日と海水浴シーズンは余裕を持って。</p></div></li>
+                <li><span class="route-dot">3</span><div><small>駐車</small><h3>指定駐車場を利用</h3><p>大洗海浜公園内・サンビーチ周辺の指定区画へ。路上や近隣施設への目的外駐車は避けましょう。</p></div></li>
+              </ol>
+            </div>
+            <div class="route-content" data-route-panel="bus" hidden>
+              <ol class="route-steps">
+                <li><span class="route-dot">1</span><div><small>大洗駅から</small><h3>町内循環バス「海遊号」</h3><p>「海遊号」の大洗サンビーチ方面便を利用すると、海辺のエリアまで約10分が目安です。</p></div></li>
+                <li><span class="route-dot">2</span><div><small>運行に注意</small><h3>時刻と運休日を確認</h3><p>便数や経路は曜日・時期で変わり、2026年秋には再編も予定されています。往路と帰路を先に確認してください。</p></div></li>
+                <li><span class="route-dot">3</span><div><small>周遊</small><h3>徒歩と組み合わせる</h3><p>公園、マリンタワー、シーサイドステーションは徒歩でまとめて回りやすい範囲です。</p></div></li>
+              </ol>
+            </div>
+          </div>
+
+          <aside class="access-aside">
+            <div class="map-graphic" aria-label="大洗駅から大洗海浜公園までの概略図">
+              <span class="map-sea">PACIFIC<br />OCEAN</span>
+              <div class="map-line"></div>
+              <span class="map-point station"><i></i>大洗駅</span>
+              <span class="map-point tower"><i></i>マリンタワー</span>
+              <span class="map-point park"><i></i>大洗海浜公園</span>
+              <span class="map-point beach"><i></i>サンビーチ</span>
+            </div>
+            <div class="parking-note">
+              <div class="parking-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="6" width="34" height="36" rx="5"/><path d="M18 34V14h8a7 7 0 0 1 0 14h-8m0-7h8"/></svg></div>
+              <div><h3>駐車場について</h3><p>繁忙期や指定日は有料運用があります。2026年の指定日は普通車1,000円で、料金徴収は7:00〜15:00です。対象日や運用は変更され得るため、直前の案内を確認してください。</p></div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="access-tips">
+          <div><strong>混雑を避ける</strong><p>海水浴期間、花火・大型イベント、連休は午前中から周辺道路が混みやすくなります。</p></div>
+          <div><strong>バリアフリー</strong><p>公園内にはバリアフリートイレやスロープがあります。季節設備の利用時間には制限があります。</p></div>
+          <div><strong>海辺の装備</strong><p>風が強い日があります。帽子の固定、防風着、飲料、日焼け止めを季節に応じて準備。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="nearby" class="section-shell nearby-section" aria-labelledby="nearby-title">
+      <div class="section-heading-row">
+        <div><div class="section-kicker">NEARBY SPOTS</div><h2 id="nearby-title" class="section-title">周辺スポット</h2></div>
+        <p class="section-lead">徒歩圏の港エリアと、車で少し足を延ばす海岸エリアを組み合わせると、一日の流れが作りやすくなります。</p>
+      </div>
+      <div class="nearby-feature-grid">
+        <article class="nearby-image-card">
+          <img src="/images/marine-tower.webp" alt="大洗マリンタワー" width="1200" height="900" loading="lazy" />
+          <div><span>徒歩 約5〜10分</span><h3>大洗マリンタワー</h3><p>高さ約60mの大洗のシンボル。展望室から港と太平洋を一望できます。</p></div>
+        </article>
+        <article class="nearby-image-card">
+          <img src="/images/isosaki-torii.webp" alt="大洗磯前神社の神磯の鳥居" width="1200" height="900" loading="lazy" />
+          <div><span>車 約10分</span><h3>大洗磯前神社・神磯の鳥居</h3><p>岩礁に立つ鳥居と波が印象的な大洗の代表景観。波打ち際へ無理に近づかず鑑賞を。</p></div>
+        </article>
+      </div>
+      <div class="nearby-list">
+        <article><span>01</span><div><h3>大洗サンビーチ</h3><p>公園に隣接。広い砂浜、海水浴、潮干狩り、ビーチスポーツの拠点。</p></div><strong>隣接</strong></article>
+        <article><span>02</span><div><h3>大洗わくわく科学館</h3><p>海をテーマにした参加体験型施設。天候が崩れた日の親子観光にも。</p></div><strong>徒歩圏</strong></article>
+        <article><span>03</span><div><h3>かねふく めんたいパーク大洗</h3><p>工場見学、直売、フードコート、キッズエリアを備えた明太子のテーマ施設。</p></div><strong>徒歩 約15分</strong></article>
+        <article><span>04</span><div><h3>アクアワールド茨城県大洗水族館</h3><p>サメをはじめ多彩な海の生き物に出会える大型水族館。</p></div><strong>車 約15分</strong></article>
+      </div>
+    </section>
+
+    <MemorialCard />
+
+    <section class="rules-section">
+      <div class="section-shell rules-layout">
+        <div><div class="section-kicker">GOOD MANNERS</div><h2 class="section-title">海辺の時間を、次の人にも。</h2></div>
+        <div class="rules-grid">
+          <div><span>01</span><p>バーベキュー、花火など火気の使用や、許可のないキャンプは行わない。</p></div>
+          <div><span>02</span><p>犬はリードをつけ、ふんやごみは必ず持ち帰る。</p></div>
+          <div><span>03</span><p>指定場所以外への車両乗り入れ・駐車をしない。</p></div>
+          <div><span>04</span><p>強風・高波・雷など、海辺の急な天候変化を軽視しない。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq section-shell" aria-labelledby="faq-title">
+      <div><div class="section-kicker">FAQ</div><h2 id="faq-title" class="section-title">よくある質問</h2></div>
+      <div class="faq-list">
+        <details open><summary>入園料や開園時間は？</summary><p>散歩、休憩、外遊びなど通常利用は無料で、常時利用できます。海水浴場の監視、シャワー、更衣室など季節設備には開設期間・利用時間があります。</p></details>
+        <details><summary>公園で泳げますか？</summary><p>遊泳は隣接する大洗サンビーチの海水浴場開設期間・指定区域で楽しんでください。開設期間外は監視員がいないため、海況に十分注意してください。</p></details>
+        <details><summary>子ども連れでも過ごしやすいですか？</summary><p>芝生広場、遊歩道、休憩スペース、トイレがあり、親子で過ごしやすい公園です。海辺では子どもから目を離さず、夏は地面の熱さと熱中症に注意してください。</p></details>
+        <details><summary>写真は本当にアップロードされませんか？</summary><p>このページの記念カード機能は、ブラウザの Canvas を使って端末内だけで合成します。選択した写真、入力文字、完成画像をサーバーへ送信する処理はありません。</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-wave" aria-hidden="true"></div>
+    <div class="section-shell footer-grid">
+      <div class="footer-brand">
+        <span class="brand-mark"><svg viewBox="0 0 48 48"><path d="M5 28c6-7 12-7 18 0s12 7 20 0"/><circle cx="33" cy="16" r="5"/></svg></span>
+        <div><strong>大洗海浜公園</strong><small>海と港のあいだで、深呼吸する休日。</small></div>
+      </div>
+      <nav aria-label="フッターナビゲーション"><a href="#top">トップ</a><a href="#food">グルメ</a><a href="#access">交通</a><a href="#nearby">周辺</a><a href="#memory-card">記念カード</a></nav>
+      <details class="photo-credits">
+        <summary>写真クレジット</summary>
+        <p>大洗サンビーチ：Kanedaka Shiho / CC BY 3.0。大洗マリンタワー：TTTNIS / Public Domain。神磯の鳥居：Σ64 / CC BY 3.0。大洗港：KΛNΛTΛ / CC BY-SA 3.0。掲載画像はトリミング・WebP変換を行っています。</p>
+      </details>
+    </div>
+    <div class="footer-bottom section-shell">
+      <p>本サイトは大洗町・茨城県および各施設の公式サイトではありません。</p>
+      <p>© <span data-current-year></span> Oarai Kaihin Park Guide</p>
+    </div>
+  </footer>
+
+  <div class="copy-toast" data-copy-toast role="status" aria-live="polite">住所をコピーしました</div>
+
+  <script>
+    const copyButton = document.querySelector('[data-copy-address]');
+    const toast = document.querySelector('[data-copy-toast]');
+    copyButton?.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText('〒311-1305 茨城県東茨城郡大洗町港中央');
+        toast?.classList.add('show');
+        window.setTimeout(() => toast?.classList.remove('show'), 1800);
+      } catch {
+        window.prompt('住所をコピーしてください', '〒311-1305 茨城県東茨城郡大洗町港中央');
+      }
+    });
+
+    document.querySelectorAll('[data-route-tab]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const target = button.getAttribute('data-route-tab');
+        document.querySelectorAll('[data-route-tab]').forEach((item) => item.setAttribute('aria-selected', String(item === button)));
+        document.querySelectorAll('[data-route-panel]').forEach((panel) => {
+          panel.toggleAttribute('hidden', panel.getAttribute('data-route-panel') !== target);
+        });
+      });
+    });
+
+    document.querySelectorAll('[data-current-year]').forEach((element) => {
+      element.textContent = String(new Date().getFullYear());
+    });
+
+    document.querySelectorAll('.mobile-menu a').forEach((link) => {
+      link.addEventListener('click', () => link.closest('details')?.removeAttribute('open'));
+    });
+  </script>
+</BaseLayout>

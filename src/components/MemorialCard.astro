@@ -1,0 +1,114 @@
+<section id="memory-card" class="section-shell memory-section" aria-labelledby="memory-title">
+  <div class="section-kicker">MEMORY CARD</div>
+  <div class="memory-heading-grid">
+    <div>
+      <h2 id="memory-title" class="section-title">海辺の一枚を、旅のカードに。</h2>
+      <p class="section-lead">
+        カメラ・自撮り・アルバムから写真を選び、サイズと色調を整えるだけ。大洗海浜公園の名前と日付を重ねた記念カードを、端末内で作成できます。
+      </p>
+    </div>
+    <div class="privacy-badge" role="note" aria-label="写真のプライバシーについて">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V8a5 5 0 0 1 10 0v2m-9 0h8a2 2 0 0 1 2 2v7H6v-7a2 2 0 0 1 2-2Z"/><path d="M12 14v2"/></svg>
+      <div>
+        <strong>写真は端末の中だけ</strong>
+        <span>アップロード・サーバー送信は行いません</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="memory-app" data-memory-app>
+    <div class="memory-controls">
+      <div class="control-block">
+        <span class="control-label">1. 写真を選ぶ</span>
+        <div class="photo-source-grid">
+          <label class="source-button" for="camera-environment">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.5-2h7L17 8h3v11H4V8Z"/><circle cx="12" cy="13" r="3.5"/></svg>
+            <span>カメラ</span>
+          </label>
+          <input id="camera-environment" class="sr-only" type="file" accept="image/*" capture="environment" data-photo-input />
+
+          <label class="source-button" for="camera-user">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="3"/><path d="M6.5 19c.5-3.2 2.4-5 5.5-5s5 1.8 5.5 5"/><path d="M3 6V3h3m12 0h3v3M3 18v3h3m12 0h3v-3"/></svg>
+            <span>自撮り</span>
+          </label>
+          <input id="camera-user" class="sr-only" type="file" accept="image/*" capture="user" data-photo-input />
+
+          <label class="source-button" for="photo-library">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="m6 17 4-4 3 3 2-2 3 3"/></svg>
+            <span>アルバム</span>
+          </label>
+          <input id="photo-library" class="sr-only" type="file" accept="image/*" data-photo-input />
+        </div>
+        <p class="microcopy">写真はお使いの端末にのみ保存されます。</p>
+      </div>
+
+      <fieldset class="control-block">
+        <legend class="control-label">2. サイズ</legend>
+        <div class="segmented-control" data-size-control>
+          <label><input type="radio" name="card-size" value="square" checked /><span>1:1</span></label>
+          <label><input type="radio" name="card-size" value="postcard" /><span>はがき・縦</span></label>
+          <label><input type="radio" name="card-size" value="story" /><span>9:16</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="control-block">
+        <legend class="control-label">3. 色調</legend>
+        <div class="style-options" data-style-control>
+          <label class="style-option morning">
+            <input type="radio" name="card-style" value="morning" checked />
+            <span class="style-swatch"></span>
+            <span><strong>朝凪</strong><small>海霧と白波</small></span>
+          </label>
+          <label class="style-option sunset">
+            <input type="radio" name="card-style" value="sunset" />
+            <span class="style-swatch"></span>
+            <span><strong>夕映え</strong><small>砂色と橙光</small></span>
+          </label>
+          <label class="style-option breeze">
+            <input type="radio" name="card-style" value="breeze" />
+            <span class="style-swatch"></span>
+            <span><strong>潮風</strong><small>青緑と余白</small></span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="control-block form-grid">
+        <label>
+          <span class="control-label">スポット名</span>
+          <input type="text" maxlength="24" value="大洗海浜公園" data-card-title />
+        </label>
+        <label>
+          <span class="control-label">日付</span>
+          <input type="date" data-card-date />
+        </label>
+      </div>
+
+      <div class="control-block">
+        <div class="range-heading">
+          <label for="photo-zoom" class="control-label">写真の拡大</label>
+          <button type="button" class="text-button" data-reset-photo>位置を戻す</button>
+        </div>
+        <input id="photo-zoom" class="range-input" type="range" min="1" max="2.5" step="0.01" value="1" data-photo-zoom />
+        <p class="microcopy">プレビュー上で写真をドラッグして位置を調整できます。</p>
+      </div>
+
+      <button type="button" class="download-button" data-download-card>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 20h14"/></svg>
+        PNGで端末に保存
+      </button>
+      <p class="status-message" data-card-status aria-live="polite"></p>
+    </div>
+
+    <div class="memory-preview-wrap">
+      <div class="preview-label"><span>LIVE PREVIEW</span><span>端末内処理</span></div>
+      <div class="canvas-frame" data-canvas-frame>
+        <canvas data-memory-canvas width="1080" height="1080" aria-label="大洗海浜公園の記念カードプレビュー"></canvas>
+      </div>
+      <p class="preview-caption">初期写真は大洗の海辺です。お手元の写真を選ぶと、その場で置き換わります。</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '@/scripts/memorial-card';
+</script>
