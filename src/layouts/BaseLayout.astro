@@ -31,6 +31,7 @@ const ogImage = Astro.site ? new URL(image, Astro.site) : image;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage.toString()} />
+    <meta property="og:image:alt" content="大洗海浜公園（Oarai Seaside Park）の海辺の風景" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -47,6 +48,13 @@ const ogImage = Astro.site ? new URL(image, Astro.site) : image;
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-HXM22WWPKP', { anonymize_ip: true });
+    </script>
+    <script is:inline>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
     </script>
   </head>
   <body>

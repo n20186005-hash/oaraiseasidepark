@@ -3,8 +3,23 @@
   "short_name": "大洗海浜公園",
   "lang": "ja",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#f6f3eb",
   "theme_color": "#0d5160",
-  "icons": []
+  "description": "茨城県大洗町の大洗海浜公園（Oarai Seaside Park）を楽しむための非公式ガイド。",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
 }

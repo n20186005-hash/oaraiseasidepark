@@ -1,0 +1,255 @@
+---
+// 大洗海浜公園の現地天気＋海象を Open-Meteo から取得し、観光客向けのアドバイスを表示するウィジェット。
+// サーバー側（ビルド時）で一度取得して静的 HTML に含め、クライアント側で最新の値へ上書き更新する。
+import { fetchWeatherData, buildAdvice, buildTideSvg } from '@/lib/weather';
+
+const model = await fetchWeatherData();
+const advice = model ? buildAdvice(model) : null;
+const initialJson = model ? JSON.stringify(model) : '';
+const tideSummary = model
+  ? `満潮${model.tideEvents.filter((e) => e.type === 'high').length}回・干潮${model.tideEvents.filter((e) => e.type === 'low').length}回`
+  : '';
+---
+
+<section id="weather" class="section-shell weather-section" aria-labelledby="weather-title">
+  <div class="section-heading-row">
+    <div>
+      <div class="section-kicker">TODAY &amp; THIS WEEK</div>
+      <h2 id="weather-title" class="section-title">今の空模様と、あなたへのアドバイス</h2>
+    </div>
+    <p class="section-lead">大洗海浜公園の現地の天気と海の様子。出かける前の傘や装備、遊び方の目安にご利用ください。</p>
+  </div>
+
+  <div class="weather-card" data-weather-root data-initial={initialJson}>
+    <div class="weather-current">
+      <div class="weather-now">
+        <span class="weather-icon" data-w-icon aria-hidden="true"></span>
+        <div class="weather-now-text">
+          <span class="weather-temp" data-w-temp>--°</span>
+          <span class="weather-desc" data-w-desc>天気を確認しています…</span>
+        </div>
+      </div>
+      <dl class="weather-meta">
+        <div><dt>体感</dt><dd data-w-feels>--°</dd></div>
+        <div><dt>湿度</dt><dd data-w-humidity>--%</dd></div>
+        <div><dt>風速</dt><dd data-w-wind>-- km/h</dd></div>
+        <div><dt>降水量</dt><dd data-w-precip>-- mm</dd></div>
+      </dl>
+    </div>
+    <div class="weather-forecast">
+      <div class="forecast-track" data-w-forecast></div>
+    </div>
+  </div>
+
+  <div class="weather-advice">
+    <div class="advice-risk" data-w-risk hidden={advice && advice.risks.length ? undefined : ''}>
+      {advice ? advice.risks.join('　') : ''}
+    </div>
+    <div class="advice-grid">
+      <div class="advice-col" data-w-col="travel" hidden={advice && advice.travel.length ? undefined : ''}>
+        <h4>出行穿搭</h4>
+        <ul data-w-travel>{advice ? advice.travel.map((s) => <li>{s}</li>) : null}</ul>
+      </div>
+      <div class="advice-col" data-w-col="activities" hidden={advice && advice.activities.length ? undefined : ''}>
+        <h4>遊び方</h4>
+        <ul data-w-activities>{advice ? advice.activities.map((s) => <li>{s}</li>) : null}</ul>
+      </div>
+      <div class="advice-col" data-w-col="items" hidden={advice && advice.items.length ? undefined : ''}>
+        <h4>持ち物</h4>
+        <ul data-w-items>{advice ? advice.items.map((s) => <li>{s}</li>) : null}</ul>
+      </div>
+    </div>
+    <div class="marine-card">
+      <h4>海辺の目安</h4>
+      <div class="marine-stats">
+        <div><span>今日の干潮</span><strong data-w-lowtide>{model && model.lowTideHour != null ? `${model.lowTideHour}時頃` : '—'}</strong></div>
+        <div><span>波の高さ</span><strong data-w-wave>{model ? `${model.marine.waveMax.toFixed(1)} m` : '—'}</strong></div>
+        <div><span>海水温</span><strong data-w-seatemp>{model && !Number.isNaN(model.marine.seaTempMean) ? `${model.marine.seaTempMean.toFixed(1)}℃` : '—'}</strong></div>
+      </div>
+      <div class="tide-block">
+        <div class="tide-head"><h5>潮汐（今日）</h5><span data-w-tide-summary>{tideSummary}</span></div>
+        <div class="tide-chart" data-w-tide-chart set:html={model ? buildTideSvg(model) : ''}></div>
+        <ul class="tide-events" data-w-tide-events>
+          {model ? model.tideEvents.map((e) => <li class={e.type}>{e.type === 'high' ? '満潮' : '干潮'} {e.hour}時頃</li>) : null}
+        </ul>
+      </div>
+      <p class="marine-note" data-w-marinote>{advice ? advice.marineNote : ''}</p>
+    </div>
+    <p class="weather-source">※ アドバイスは気象・海象の予測データをもとにした目安です。最新の注意報・警報は気象庁等でご確認ください。</p>
+  </div>
+  <p class="weather-updated" data-w-updated aria-live="polite"></p>
+</section>
+
+<script>
+  import { fetchWeatherData, buildAdvice, buildTideSvg, groupOf, WMO_LABELS, windDirLabel } from '@/lib/weather';
+
+  const ICONS: Record<string, string> = {
+    clear:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="#f4b860"/><g stroke="#f4b860" stroke-width="1.6" stroke-linecap="round"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.6 4.6l2 2M17.4 17.4l2 2M19.4 4.6l-2 2M6.6 17.4l-2 2"/></g></svg>',
+    partly:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2" fill="#f4b860"/><g stroke="#f4b860" stroke-width="1.4" stroke-linecap="round"><path d="M9 2v2M2.5 8h2M14 4l1.4 1.4"/></g><path d="M7 19h10a3.6 3.6 0 0 0 .4-7.18A4.6 4.6 0 0 0 7.7 13.4 3.1 3.1 0 0 0 7 19Z" fill="#cdd6d8"/></svg>',
+    cloud:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18h10a3.6 3.6 0 0 0 .4-7.18A4.6 4.6 0 0 0 7.7 12.4 3.1 3.1 0 0 0 7 18Z" fill="#cdd6d8"/></svg>',
+    fog:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14h10a3.6 3.6 0 0 0 .4-7.18A4.6 4.6 0 0 0 7.7 8.4 3.1 3.1 0 0 0 7 14Z" fill="#cdd6d8"/><g stroke="#9fb0b2" stroke-width="1.5" stroke-linecap="round"><path d="M4 17.5h16M6 20.5h12"/></g></svg>',
+    drizzle:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 13h10a3.6 3.6 0 0 0 .4-7.18A4.6 4.6 0 0 0 7.7 7.4 3.1 3.1 0 0 0 7 13Z" fill="#cdd6d8"/><g stroke="#7fb6c4" stroke-width="1.5" stroke-linecap="round"><path d="M9 16.5l-1 2M13 16.5l-1 2M17 16.5l-1 2"/></g></svg>',
+    rain:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 13h10a3.6 3.6 0 0 0 .4-7.18A4.6 4.6 0 0 0 7.7 7.4 3.1 3.1 0 0 0 7 13Z" fill="#cdd6d8"/><g stroke="#5a93a3" stroke-width="1.7" stroke-linecap="round"><path d="M9 15.5l-1 3M13 15.5l-1 3M17 15.5l-1 3"/></g></svg>',
+    snow:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 13h10a3.6 3.6 0 0 0 .4-7.18A4.6 4.6 0 0 0 7.7 7.4 3.1 3.1 0 0 0 7 13Z" fill="#cdd6d8"/><g fill="#bcd2da"><circle cx="9" cy="17.5" r="1"/><circle cx="13" cy="19.5" r="1"/><circle cx="17" cy="17.5" r="1"/></g></svg>',
+    thunder:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 13h10a3.6 3.6 0 0 0 .4-7.18A4.6 4.6 0 0 0 7.7 7.4 3.1 3.1 0 0 0 7 13Z" fill="#cdd6d8"/><path d="M12 14l-2 4h3l-2 4" fill="none" stroke="#e0a93b" stroke-width="1.7" stroke-linejoin="round"/></svg>',
+  };
+
+  type TideEvent = { type: 'high' | 'low'; hour: number; level: number };
+
+  type Model = {
+    current: { code: number; temp: number; feels: number; humidity: number; windKmh: number; windDir: number; precip: number };
+    today: { code: number; tempMax: number; tempMin: number; pop: number; uv: number; windKmhMax: number };
+    forecast: { dow: string; code: number; max: number; min: number; pop: number }[];
+    marine: { waveMax: number; seaTempMean: number; tide: number[] };
+    tideEvents: TideEvent[];
+    lowTideHour: number | null;
+  };
+
+  function escapeHtml(s: string): string {
+    return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] as string));
+  }
+
+  function setText(root: HTMLElement, sel: string, text: string): void {
+    const el = root.querySelector(sel);
+    if (el) el.textContent = text;
+  }
+
+  function renderCurrent(root: HTMLElement, m: Model): void {
+    const c = m.current;
+    const icon = root.querySelector('[data-w-icon]');
+    if (icon) icon.innerHTML = ICONS[groupOf(c.code)] ?? ICONS.cloud;
+    setText(root, '[data-w-temp]', `${c.temp}°`);
+    setText(root, '[data-w-desc]', WMO_LABELS[c.code] ?? '曇り');
+    setText(root, '[data-w-feels]', `${c.feels}°`);
+    setText(root, '[data-w-humidity]', `${c.humidity}%`);
+    setText(root, '[data-w-wind]', `${c.windKmh.toFixed(0)} km/h（${windDirLabel(c.windDir)}）`);
+    setText(root, '[data-w-precip]', `${c.precip.toFixed(1)} mm`);
+  }
+
+  function renderForecast(root: HTMLElement, m: Model): void {
+    const track = root.querySelector('[data-w-forecast]');
+    if (!track) return;
+    track.innerHTML = m.forecast
+      .map(
+        (f) =>
+          `<div class="forecast-day"><span class="forecast-dow">${f.dow}</span><span class="forecast-icon">${ICONS[groupOf(f.code)] ?? ICONS.cloud}</span><span class="forecast-temp"><strong>${f.max}°</strong><small>${f.min}°</small></span><span class="forecast-pop">降水${f.pop}%</span></div>`
+      )
+      .join('');
+  }
+
+  function fillList(root: HTMLElement, colSel: string, listSel: string, arr: string[]): void {
+    const col = root.querySelector(colSel);
+    const ul = root.querySelector(listSel);
+    if (ul) ul.innerHTML = arr.map((s) => `<li>${escapeHtml(s)}</li>`).join('');
+    if (col) (col as HTMLElement).hidden = arr.length === 0;
+  }
+
+  function renderAdvice(root: HTMLElement, m: Model): void {
+    const a = buildAdvice(m);
+    const risk = root.querySelector('[data-w-risk]');
+    if (risk) {
+      risk.textContent = a.risks.join('　');
+      (risk as HTMLElement).hidden = a.risks.length === 0;
+    }
+    fillList(root, '[data-w-col="travel"]', '[data-w-travel]', a.travel);
+    fillList(root, '[data-w-col="activities"]', '[data-w-activities]', a.activities);
+    fillList(root, '[data-w-col="items"]', '[data-w-items]', a.items);
+    setText(root, '[data-w-lowtide]', m.lowTideHour != null ? `${m.lowTideHour}時頃` : '—');
+    setText(root, '[data-w-wave]', `${m.marine.waveMax.toFixed(1)} m`);
+    setText(root, '[data-w-seatemp]', Number.isNaN(m.marine.seaTempMean) ? '—' : `${m.marine.seaTempMean.toFixed(1)}℃`);
+    setText(root, '[data-w-marinote]', a.marineNote);
+  }
+
+  function renderTide(root: HTMLElement, m: Model): void {
+    const chart = root.querySelector('[data-w-tide-chart]');
+    if (chart) chart.innerHTML = buildTideSvg(m);
+    const ul = root.querySelector('[data-w-tide-events]');
+    if (ul)
+      ul.innerHTML = m.tideEvents
+        .map((e) => `<li class="${e.type}">${e.type === 'high' ? '満潮' : '干潮'} ${e.hour}時頃</li>`)
+        .join('');
+    const highs = m.tideEvents.filter((e) => e.type === 'high').length;
+    const lows = m.tideEvents.filter((e) => e.type === 'low').length;
+    setText(root, '[data-w-tide-summary]', `満潮${highs}回・干潮${lows}回`);
+  }
+
+  function renderUpdated(root: HTMLElement, fromCache: boolean): void {
+    const el = root.querySelector('[data-w-updated]');
+    if (!el) return;
+    const now = new Date();
+    const hh = String(now.getHours()).padStart(2, '0');
+    const mm = String(now.getMinutes()).padStart(2, '0');
+    el.textContent = `更新：${hh}:${mm}（${fromCache ? '事前取得値' : '最新値'}）`;
+  }
+
+  const CACHE_KEY = 'oarai-weather-v2';
+  const CACHE_TTL = 30 * 60 * 1000;
+
+  function loadCache(): Model | null {
+    try {
+      const raw = localStorage.getItem(CACHE_KEY);
+      if (raw) {
+        const obj = JSON.parse(raw) as { ts: number; model: Model };
+        if (Date.now() - obj.ts < CACHE_TTL) return obj.model;
+      }
+    } catch {
+      /* ignore */
+    }
+    return null;
+  }
+
+  async function refresh(): Promise<void> {
+    const root = document.querySelector<HTMLElement>('[data-weather-root]');
+    if (!root) return;
+
+    const cached = loadCache();
+    const initialRaw = root.getAttribute('data-initial');
+    let initial: Model | null = null;
+    if (cached) initial = cached;
+    else if (initialRaw) {
+      try {
+        initial = JSON.parse(initialRaw) as Model;
+      } catch {
+        initial = null;
+      }
+    }
+
+    if (initial) {
+      renderCurrent(root, initial);
+      renderForecast(root, initial);
+      renderAdvice(root, initial);
+      renderTide(root, initial);
+      renderUpdated(root, true);
+    }
+
+    try {
+      const m = await fetchWeatherData();
+      if (m) {
+        try {
+          localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), model: m }));
+        } catch {
+          /* ignore quota */
+        }
+        renderCurrent(root, m);
+        renderForecast(root, m);
+        renderAdvice(root, m);
+        renderTide(root, m);
+        renderUpdated(root, false);
+      } else if (!initial) {
+        setText(root, '[data-w-desc]', '現在、天気情報を取得できませんでした。時間をおいて再度ご確認ください。');
+      }
+    } catch {
+      if (!initial) setText(root, '[data-w-desc]', '現在、天気情報を取得できませんでした。時間をおいて再度ご確認ください。');
+    }
+  }
+
+  refresh();
+</script>
