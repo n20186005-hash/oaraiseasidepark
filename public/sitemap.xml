@@ -1,8 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://oaraiseasidepark.com/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://oaraiseasidepark.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oaraiseasidepark.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://oaraiseasidepark.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oaraiseasidepark.com/"/>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://oaraiseasidepark.com/parking/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://oaraiseasidepark.com/parking/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oaraiseasidepark.com/en/parking/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://oaraiseasidepark.com/zh/parking/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oaraiseasidepark.com/parking/"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://oaraiseasidepark.com/access/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://oaraiseasidepark.com/access/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oaraiseasidepark.com/en/access/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://oaraiseasidepark.com/zh/access/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oaraiseasidepark.com/access/"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://oaraiseasidepark.com/facilities/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://oaraiseasidepark.com/facilities/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oaraiseasidepark.com/en/facilities/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://oaraiseasidepark.com/zh/facilities/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oaraiseasidepark.com/facilities/"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://oaraiseasidepark.com/photos/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://oaraiseasidepark.com/photos/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oaraiseasidepark.com/en/photos/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://oaraiseasidepark.com/zh/photos/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oaraiseasidepark.com/photos/"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://oaraiseasidepark.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://oaraiseasidepark.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oaraiseasidepark.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://oaraiseasidepark.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oaraiseasidepark.com/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://oaraiseasidepark.com/zh/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://oaraiseasidepark.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oaraiseasidepark.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://oaraiseasidepark.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oaraiseasidepark.com/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

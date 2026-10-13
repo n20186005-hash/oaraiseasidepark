@@ -1,0 +1,55 @@
+---
+import TopicLayout from '@/layouts/TopicLayout.astro';
+
+const title = '大洗海浜公園の写真｜海辺の風景・サンビーチ・周辺の眺め';
+const description = '大洗海浜公園（茨城県大洗町）とその海辺の写真ガイド。太平洋の眺め、大洗サンビーチの砂浜、マリンタワー、磯前神社の鳥居など、訪れる前に風景を確認できます。';
+const pageName = '写真';
+const kicker = 'PHOTO GUIDE';
+const heroTitle = '大洗海浜公園の写真';
+const heroSubtitle = '海と港のあいだに広がる風景。訪れる前に、場所の雰囲気を写真で確認できます。';
+
+const photos = [
+  { src: '/images/hero-oarai.webp', alt: '大洗海浜公園の海側から望む太平洋の水平線と寄せる波', title: '太平洋の眺め', caption: '公園の海側からは、水平線まで続く太平洋が望めます。朝の静けさから夕暮れの色づきまで、刻々と表情が変わります。' },
+  { src: '/images/sun-beach-card.webp', alt: '大洗海浜公園に隣接する大洗サンビーチの砂浜と海', title: '大洗サンビーチ', caption: '公園に隣接する砂浜。散歩や砂遊び、波の観察に。開設期間や監視の有無は時期によります。' },
+  { src: '/images/marine-tower.webp', alt: '大洗マリンタワーの展望施設と海', title: '大洗マリンタワー', caption: '公園から歩いて行ける展望塔。太平洋と港の眺望が楽しめ、夜間のライトアップも親しまれています。' },
+  { src: '/images/oarai-port.webp', alt: '大洗港のマリーナと停泊するヨットや漁船', title: '大洗港・マリーナ', caption: '公園のすぐ近くにある大洗港。マリーナのヨットや漁船、潮の香りが海辺の風景を作ります。' },
+  { src: '/images/oarai-port-wide.webp', alt: '大洗港全体を望む広い港の風景', title: '港エリアの全景', caption: '港中央から望む大洗港の全景。食堂やカフェが軒を連ね、食事や買い物も楽しめます。' },
+  { src: '/images/isosaki-torii.webp', alt: '磯前神社の海に立つ大鳥居', title: '磯前神社の鳥居', caption: '公園周辺の人気撮影スポット。海に立つ大鳥居は、大洗を代表する風景の一つです。' },
+];
+---
+
+<TopicLayout
+  title={title}
+  description={description}
+  pageName={pageName}
+  kicker={kicker}
+  heroTitle={heroTitle}
+  heroSubtitle={heroSubtitle}
+>
+  <section class="topic-section">
+    <div class="section-shell">
+      <div class="section-heading-row">
+        <div>
+          <div class="section-kicker">SEASIDE GALLERY</div>
+          <h2 class="section-title">大洗の海辺の風景</h2>
+        </div>
+        <p class="section-lead">大洗海浜公園は大洗港のマリーナ地区にあり、海・砂浜・港が一つの風景にまとまっています。</p>
+      </div>
+
+      <div class="photo-gallery">
+        {photos.map((photo) => (
+          <figure class="photo-card">
+            <img src={photo.src} alt={photo.alt} width="640" height="280" loading="lazy" decoding="async" />
+            <figcaption><strong>{photo.title}</strong>{photo.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <p class="info-note">※ 掲載写真は大洗海浜公園とその周辺（大洗サンビーチ、マリンタワー、大洗港、磯前神社など）の風景です。芝生広場や遊歩道など公園内の施設写真は、順次追加していく予定です。</p>
+      <div class="topic-cta">
+        <a class="ghost-button" href="/facilities/">園内施設を見る</a>
+        <a class="ghost-button" href="/access/">アクセスを見る</a>
+      </div>
+    </div>
+  </section>
+</TopicLayout>

@@ -1,0 +1,131 @@
+---
+import TopicLayout from '@/layouts/TopicLayout.astro';
+
+const title = '大洗海浜公園の園内施設｜芝生広場・多目的広場・遊歩道';
+const description = '大洗海浜公園（茨城県大洗町）の園内施設ガイド。芝生広場、多目的広場、潮風の遊歩道、休憩スペース、トイレなどの一般利用と、行事利用の申請・ルールの違いを紹介します。';
+const pageName = '園内施設';
+const kicker = 'FACILITIES';
+const heroTitle = '大洗海浜公園の園内施設';
+const heroSubtitle = '芝生広場や多目的広場、遊歩道。日常の散歩から行事利用まで、知っておきたい施設の使い方。';
+
+const faqs = [
+  {
+    q: '園内は無料で利用できますか？',
+    a: '一般の方の散歩、休憩、ピクニック、外遊びなど公園の通常利用は無料です。特定の行事・占用で多目的広場等を使う場合には、大洗町への利用申請と手数料等のルールが別途あります。日常利用と行事利用を混同しないよう、詳細は大洗町の公式案内でご確認ください。',
+  },
+  {
+    q: '多目的広場はどのように使いますか？',
+    a: '多目的広場はイベントや催し、スポーツ等に使われる広場です。個人の散歩や見学は自由にできますが、団体・行事での占用利用や資材の設置を伴う場合は、あらかじめ大洗町の公園管理窓口へ利用申請が必要です。',
+  },
+  {
+    q: 'トイレや休憩スペースはありますか？',
+    a: '公園内に複数の公衆トイレがあり、一部は多機能・バリアフリー対応です。芝生広場や遊歩道の近くには休憩スペースも整備されており、親子や高齢の方でも過ごしやすいよう配慮されています。',
+  },
+  {
+    q: '波打ち際や海水浴はどこで？',
+    a: '公園に隣接する大洗サンビーチで海水浴や砂浜の遊びを楽しめます。開設期間や監視・設備の有無は時期によります。園内の海辺では波や岩場に注意し、遊泳は指定区域でお願いします。',
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+
+const townOfficialUrl = 'https://www.town.oarai.lg.jp/';
+---
+
+<TopicLayout
+  title={title}
+  description={description}
+  pageName={pageName}
+  kicker={kicker}
+  heroTitle={heroTitle}
+  heroSubtitle={heroSubtitle}
+  jsonLd={faqLd}
+>
+  <section class="topic-section">
+    <div class="section-shell">
+      <div class="section-heading-row">
+        <div>
+          <div class="section-kicker">OVERVIEW</div>
+          <h2 class="section-title">園内の施設と過ごし方</h2>
+        </div>
+        <p class="section-lead">海辺の余白を、だれもが自由に過ごせるように整備された施設たち。</p>
+      </div>
+      <p class="topic-intro">大洗海浜公園は、大洗港のマリーナ地区に整備された開放的な海辺の公園です。広い芝生広場、潮風の遊歩道、多目的広場、休憩スペースがまとまり、隣接する大洗サンビーチと一続きのように楽しめます。</p>
+
+      <div class="services-grid" style="margin-top:36px;">
+        <article class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 38c8-5 13-5 19 0s14 5 17 0M6 30c8-5 13-5 19 0s14 5 17 0"/></svg></div>
+          <h3>芝生広場</h3>
+          <p>レジャーシートを広げてくつろげる広い芝生。ピクニックや親子の外遊び、日除け・風よけの準備があれば季節を問わず過ごしやすい場所です。</p>
+        </article>
+        <article class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 40L20 12l8 16 6-10 6 22"/></svg></div>
+          <h3>多目的広場</h3>
+          <p>イベントや催し、スポーツ等に使われる広場。日常の見学・散歩は自由ですが、占用利用には大洗町への申請・手数料等のルールがあります。</p>
+        </article>
+        <article class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 30c6-6 30-6 36 0M12 30v6h24v-6"/></svg></div>
+          <h3>潮風の遊歩道</h3>
+          <p>海沿いを歩ける平坦な遊歩道。朝の散歩や夕暮れの写真撮影、波の音を聞きながらのんびり歩くのに適しています。</p>
+        </article>
+        <article class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 20h20v18H14zM10 20l4-9h20l4 9M19 24v8M29 24v8"/></svg></div>
+          <h3>トイレ・休憩</h3>
+          <p>公園内に複数の公衆トイレがあり、一部は多機能・バリアフリー対応。休憩スペースも整備され、世代を問わず過ごしやすいです。</p>
+        </article>
+        <article class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 20h32v16H8zM12 20l4-9h16l4 9M16 28h16"/></svg></div>
+          <h3>飲食・買い物</h3>
+          <p>港エリアには海鮮・磯料理の食堂、カフェ、軽食店が点在。町内にはコンビニやスーパーもあり、水分補給や軽食の補充に便利です。</p>
+        </article>
+        <article class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 30h20v8H14zM16 30l-2-8h20l-2 8M20 22V14h8v8"/><circle cx="24" cy="11" r="2"/></svg></div>
+          <h3>給油・充電</h3>
+          <p>周辺にはガソリンスタンドと電気自動車（EV）充電ステーションがあり、車での来訪計画に活用できます。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="topic-section alt">
+    <div class="section-shell">
+      <div class="section-heading-row">
+        <div>
+          <div class="section-kicker">RULES &amp; PERMITS</div>
+          <h2 class="section-title">日常利用と行事利用の違い</h2>
+        </div>
+      </div>
+      <p class="topic-intro">大洗海浜公園は、だれもが無料で散歩や休憩、ピクニックを楽しめる公共の公園です。ただし、多目的広場などを「行事・占用」として使う場合には、大洗町への利用申請や手数料などのルールが別途あります。</p>
+      <p class="topic-intro">個人の散歩・写真・ピクニックといった日常利用と、団体・催しの占用利用を混同しないよう、詳細は大洗町の公式案内で来訪前にご確認ください。</p>
+      <p class="info-note">※ 施設の利用申請・手数料・申込期間などの詳細は、大洗町の都市公園に関する窓口・公式サイトでご確認ください。</p>
+      <div class="topic-cta">
+        <a class="primary-button" href={townOfficialUrl} target="_blank" rel="noopener noreferrer">大洗町 公式サイトで確認</a>
+        <a class="ghost-button" href="/access/">アクセスを見る</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="topic-faq">
+    <div class="section-shell">
+      <div class="section-heading-row">
+        <div>
+          <div class="section-kicker">FAQ</div>
+          <h2 class="section-title">よくある質問</h2>
+        </div>
+      </div>
+      <div class="faq-list">
+        {faqs.map((item, index) => (
+          <details open={index === 0}><summary>{item.q}</summary><p>{item.a}</p></details>
+        ))}
+      </div>
+    </div>
+  </section>
+</TopicLayout>

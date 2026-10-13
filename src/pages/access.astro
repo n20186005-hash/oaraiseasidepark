@@ -1,0 +1,164 @@
+---
+import TopicLayout from '@/layouts/TopicLayout.astro';
+
+const attractionFullName = '大洗海浜公園';
+const cityName = '大洗町';
+const stateProvince = '茨城県';
+const mapsShareUrl = 'https://maps.app.goo.gl/fLMtVbzM3GDguMRP8';
+const mapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(attractionFullName)}`;
+const govtTourismUrl = 'https://www.ibarakiguide.jp/';
+const townOfficialUrl = 'https://www.town.oarai.ibaraki.jp/';
+const mapsEmbedSrc = 'https://www.google.com/maps?q=Oarai%20Seaside%20Park&ll=36.3044132,140.5664618&z=15&output=embed';
+const address = '〒311-1305 茨城県東茨城郡大洗町港中央';
+
+const title = '大洗海浜公園へのアクセス｜電車・車・バスでの行き方';
+const description = '大洗海浜公園（茨城県大洗町）へのアクセスガイド。JR・大洗鹿島線での行き方、水戸大洗ICからの車、町内循環バス「海遊号」、空港からのルートを紹介します。';
+const pageName = 'アクセス';
+const kicker = 'ACCESS';
+const heroTitle = '大洗海浜公園へのアクセス';
+const heroSubtitle = '電車・車・バス・空港。それぞれの行き方と、着いてからの移動の目安をまとめました。';
+
+const routes = [
+  {
+    tag: '電車',
+    title: 'JR常磐線 ＋ 大洗鹿島線',
+    steps: [
+      '東京・上野からJR常磐線の特急「ひたち」「ときわ」で水戸駅へ（目安 約75–85分）。',
+      '水戸駅から鹿島臨海鉄道 大洗鹿島線で大洗駅へ（約15分）。',
+      '大洗駅から港中央方面へ徒歩で約18–20分（約1.5km）。荷物が多い日や悪天候時はタクシー・バスも便利です。',
+    ],
+  },
+  {
+    tag: '車',
+    title: '東水戸道路「水戸大洗IC」から',
+    steps: [
+      '常磐自動車道・北関東自動車道方面から東水戸道路へ接続します。',
+      '水戸大洗ICから国道51号を大洗方面へ進み、通常約10分で到着。',
+      '公園内・サンビーチ周辺の指定駐車場を利用。繁忙期・イベント日は余裕を持って。',
+    ],
+  },
+  {
+    tag: '町内移動',
+    title: '大洗駅・周辺の移動',
+    steps: [
+      '大洗駅前から町内循環バス「海遊号」の大洗サンビーチ方面便を利用（約10分の目安）。',
+      '便数や経路は曜日・時期で変わり、2026年秋には再編も予定されています。',
+      '公園、マリンタワー、シーサイドステーションは徒歩でまとめて回りやすい範囲です。',
+    ],
+  },
+  {
+    tag: '空港・長距離',
+    title: '成田・羽田からのルート',
+    steps: [
+      '成田空港は成田エクスプレス等で東京・上野方面へ、羽田空港はモノレールや京急で都心へ（1時間半〜2時間半の目安）。',
+      '東京・上野からJR常磐線で水戸駅へ（特急で約75–85分）。',
+      '水戸駅から大洗鹿島線で大洗駅（約15分）、その後徒歩またはバスで海辺のエリアへ。',
+    ],
+  },
+];
+
+const faqs = [
+  {
+    q: '最寄り駅から公園までどのくらいですか？',
+    a: '鹿島臨海鉄道 大洗鹿島線の大洗駅から、港中央方面へ徒歩で約18–20分（約1.5km）です。荷物が多い日や悪天候時は、駅前からのタクシーや町内循環バス「海遊号」の利用が便利です。',
+  },
+  {
+    q: '車で行く場合の目安は？',
+    a: '東水戸道路「水戸大洗IC」から国道51号を大洗方面へ進み、通常約10分で到着します。イベント日や海水浴シーズンは周辺道路が混みやすいため、余裕を持ってお出かけください。',
+  },
+  {
+    q: '東京・上野からのおすすめルートは？',
+    a: 'JR常磐線の特急「ひたち」「ときわ」で水戸駅へ（約75–85分）、そこから大洗鹿島線で大洗駅（約15分）まで。その後徒歩またはバスで海辺のエリアへ向かいます。',
+  },
+  {
+    q: '駐車場はありますか？',
+    a: '公園内・サンビーチ周辺に町営・公営の駐車場が複数あります。海水浴期間や指定日は有料・満車になりやすいため、詳しくは「駐車場」の特集ページでご確認ください。',
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+
+<TopicLayout
+  title={title}
+  description={description}
+  pageName={pageName}
+  kicker={kicker}
+  heroTitle={heroTitle}
+  heroSubtitle={heroSubtitle}
+  jsonLd={faqLd}
+>
+  <section class="topic-section">
+    <div class="section-shell">
+      <div class="section-heading-row">
+        <div>
+          <div class="section-kicker">ACCESS</div>
+          <h2 class="section-title">詳細交通</h2>
+        </div>
+        <p class="topic-intro" style="margin-top:0;">{address}</p>
+      </div>
+
+      <div class="access-routes">
+        {routes.map((route) => (
+          <article class="route-card-lite">
+            <span class="plan-tag">{route.tag}</span>
+            <h3>{route.title}</h3>
+            <ol class="route-steps-lite">
+              {route.steps.map((step) => <li>{step}</li>)}
+            </ol>
+          </article>
+        ))}
+      </div>
+
+      <div class="access-tips">
+        <div><strong>混雑を避ける</strong><p>海水浴期間、花火・大型イベント、連休は午前中から周辺道路が混みやすくなります。</p></div>
+        <div><strong>バリアフリー</strong><p>公園内にはバリアフリートイレやスロープがあります。季節設備の利用時間には制限があります。</p></div>
+        <div><strong>海辺の装備</strong><p>風が強い日があります。帽子の固定、防風着、飲料、日焼け止めを季節に応じて準備。</p></div>
+        <div><strong>タクシー</strong><p>大洗駅前や水戸駅から利用できます。荷物が多い日、悪天候、夜間の移動に便利です。</p></div>
+      </div>
+
+      <div class="topic-map">
+        <iframe
+          src={mapsEmbedSrc}
+          width="100%"
+          height="450"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          title="大洗海浜公園のGoogleマップ"></iframe>
+      </div>
+      <p class="official-link">
+        公式・地域の観光情報は <a href={govtTourismUrl} target="_blank" rel="noopener noreferrer">茨城県 公式観光ポータル（Ibaraki Guide）</a> や <a href={townOfficialUrl} target="_blank" rel="noopener noreferrer">大洗町 公式ウェブサイト</a> でもご確認いただけます。
+      </p>
+      <div class="topic-cta">
+        <a class="primary-button" href={mapsDirectionsUrl} target="_blank" rel="noopener noreferrer">Google マップでナビを開始</a>
+        <a class="ghost-button" href="/parking/">駐車場を確認する</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="topic-faq">
+    <div class="section-shell">
+      <div class="section-heading-row">
+        <div>
+          <div class="section-kicker">FAQ</div>
+          <h2 class="section-title">よくある質問</h2>
+        </div>
+      </div>
+      <div class="faq-list">
+        {faqs.map((item, index) => (
+          <details open={index === 0}><summary>{item.q}</summary><p>{item.a}</p></details>
+        ))}
+      </div>
+    </div>
+  </section>
+</TopicLayout>

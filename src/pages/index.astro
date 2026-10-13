@@ -3,8 +3,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import MemorialCard from '@/components/MemorialCard.astro';
 import WeatherWidget from '@/components/WeatherWidget.astro';
 
-const title = '大洗海浜公園｜駐車場・見どころ・アクセス・周辺グルメガイド';
-const description = '茨城県大洗町の大洗海浜公園（Oarai Seaside Park）を楽しむための非公式ガイド。海辺の過ごし方、電車・車でのアクセス、駐車場、周辺グルメ、近隣スポット、端末内で作れる旅の記念カードを紹介します。';
+const title = '大洗海浜公園｜駐車場・アクセス・園内施設・写真ガイド';
+const description = '大洗海浜公園（茨城県大洗町）の観光ガイド。駐車場の料金・利用期間、アクセス、芝生広場や多目的広場、写真スポット、周辺の観光情報を紹介します。';
 
 const siteUrl = Astro.site ? Astro.site.origin : 'https://oaraiseasidepark.com';
 const domainName = 'oaraiseasidepark.com';
@@ -23,9 +23,9 @@ const nearbyLandmark2 = '大洗磯前神社（神磯の鳥居）';
 
 const reviews = {
   rating: 4.1,
-  count: 1049,
+  count: 1058,
   source: 'Google Maps',
-  syncedAt: '2026 年 9 月',
+  syncedAt: '2026 年 10 月',
 };
 
 const faqs = [
@@ -101,6 +101,7 @@ const faqSchema = {
         <a href="#access">アクセス</a>
         <a href="#services">施設</a>
         <a href="#nearby">周辺スポット</a>
+        <a href="/parking/">駐車場</a>
         <a class="nav-cta" href="#memory-card">記念カード</a>
       </nav>
       <details class="mobile-menu">
@@ -112,6 +113,7 @@ const faqSchema = {
           <a href="#access">アクセス</a>
           <a href="#services">施設</a>
           <a href="#nearby">周辺スポット</a>
+          <a href="/parking/">駐車場</a>
           <a href="#memory-card">記念カード</a>
         </nav>
       </details>
@@ -125,7 +127,8 @@ const faqSchema = {
       <div class="hero-grain"></div>
       <div class="hero-content">
         <p class="hero-eyebrow">IBARAKI · OARAI · PACIFIC COAST</p>
-        <h1 id="hero-title">海と港のあいだで、<br /><em>深呼吸する休日。</em></h1>
+        <h1 id="hero-title">大洗海浜公園｜<br /><em>太平洋を望む海辺の公園。</em></h1>
+        <p class="hero-sub">海と港のあいだで、深呼吸する休日。</p>
         <p class="hero-copy">広い芝生、潮風の遊歩道、その先に続く大洗サンビーチ。朝の散歩から夕暮れまで、予定を詰め込まずに過ごせる海辺の公園です。</p>
         <div class="hero-actions">
           <a class="primary-button" href="#access">行き方を見る</a>
@@ -152,8 +155,8 @@ const faqSchema = {
       <div class="intro-copy">
         <p>大洗海浜公園は、大洗港のマリーナ地区に整備された開放的な海辺の公園です。芝生広場、遊歩道、多目的広場、休憩スペースがまとまり、隣接する大洗サンビーチと一続きのように楽しめます。</p>
         <p>海水浴だけを目的にせず、散歩、ピクニック、港の眺め、親子の外遊びなど、季節に合わせて自由に過ごせるのが魅力。マリンタワーやシーサイドステーションにも近く、大洗観光の起点にも向いています。</p>
-        <div class="review-note"><span>情報確認日</span><strong>2026.07.30</strong><small>季節設備・駐車料金・催事は来訪前に最新案内をご確認ください。</small></div>
         <p class="entity-equivalence">大洗海浜公園は、英語圏では <strong>Oarai Seaside Park</strong> として知られる、${stateProvince}${cityName}の太平洋沿いにある海辺の公園です。周辺には${nearbyLandmark1}や${nearbyLandmark2}など、大洗を代表するスポットが点在しています。</p>
+        <div class="review-note"><span>情報確認日</span><strong>2026.10.13</strong><small>季節設備・駐車料金・催事は来訪前に最新案内をご確認ください。</small></div>
         <nav class="entity-breadcrumb" aria-label="所在地の階層">
           <span>大洗海浜公園</span><i aria-hidden="true">→</i><span>大洗町</span><i aria-hidden="true">→</i><span>茨城県</span><i aria-hidden="true">→</i><span>日本</span>
         </nav>
@@ -589,6 +592,33 @@ const faqSchema = {
         </ul>
       </div>
     </section>
+
+    <section class="section-shell related-guides" aria-labelledby="home-features-title">
+      <div class="section-kicker">SPECIAL GUIDES</div>
+      <h2 id="home-features-title" class="section-title">知りたいことを深掘り</h2>
+      <div class="related-grid">
+        <a class="related-card" href="/parking/">
+          <strong>駐車場</strong>
+          <span>料金・利用期間・入口を詳しく</span>
+          <span class="related-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="related-card" href="/access/">
+          <strong>アクセス</strong>
+          <span>電車・車・バスでの行き方</span>
+          <span class="related-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="related-card" href="/facilities/">
+          <strong>園内施設</strong>
+          <span>芝生広場・多目的広場を解説</span>
+          <span class="related-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="related-card" href="/photos/">
+          <strong>写真</strong>
+          <span>海辺の風景ギャラリー</span>
+          <span class="related-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -598,7 +628,7 @@ const faqSchema = {
         <span class="brand-mark"><svg viewBox="0 0 48 48"><path d="M5 28c6-7 12-7 18 0s12 7 20 0"/><circle cx="33" cy="16" r="5"/></svg></span>
         <div><strong>大洗海浜公園</strong><small>海と港のあいだで、深呼吸する休日。</small></div>
       </div>
-      <nav aria-label="フッターナビゲーション"><a href="#top">トップ</a><a href="#weather">天気</a><a href="#reviews">評価</a><a href="#food">グルメ</a><a href="#access">交通</a><a href="#services">施設</a><a href="#nearby">周辺</a><a href="#heritage">歴史</a><a href="#sources">資料</a><a href="#memory-card">記念カード</a></nav>
+      <nav aria-label="フッターナビゲーション"><a href="#top">トップ</a><a href="#weather">天気</a><a href="#reviews">評価</a><a href="#food">グルメ</a><a href="#access">交通</a><a href="#services">施設</a><a href="#nearby">周辺</a><a href="#heritage">歴史</a><a href="#sources">資料</a><a href="#memory-card">記念カード</a><a href="/parking/">駐車場</a><a href="/access/">アクセス</a><a href="/facilities/">園内施設</a><a href="/photos/">写真</a></nav>
       <details class="photo-credits">
         <summary>写真クレジット</summary>
         <p>大洗サンビーチ：Kanedaka Shiho / CC BY 3.0。大洗マリンタワー：TTTNIS / Public Domain。神磯の鳥居：Σ64 / CC BY 3.0。大洗港：KΛNΛTΛ / CC BY-SA 3.0。掲載画像はトリミング・WebP変換を行っています。</p>

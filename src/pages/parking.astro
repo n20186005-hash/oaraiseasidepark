@@ -1,0 +1,140 @@
+---
+import TopicLayout from '@/layouts/TopicLayout.astro';
+
+const siteUrl = 'https://oaraiseasidepark.com';
+const attractionFullName = '大洗海浜公園';
+const cityName = '大洗町';
+const stateProvince = '茨城県';
+const mapsShareUrl = 'https://maps.app.goo.gl/fLMtVbzM3GDguMRP8';
+const mapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(attractionFullName)}`;
+const officialParkingUrl = 'https://www.oarai-info.jp/news/postid_3724/';
+const mapsEmbedSrc = 'https://www.google.com/maps?q=Oarai%20Seaside%20Park%20Parking&ll=36.3044132,140.5664618&z=16&output=embed';
+
+const title = '大洗海浜公園 駐車場｜料金・利用期間・入口ガイド';
+const description = '大洗海浜公園（茨城県大洗町）の駐車場ガイド。2026年の指定料金日・普通車1,000円・7:00–15:00の目安、公園内・周辺の町営駐車場、入口・ナビ、満車時の対応を紹介します。';
+const pageName = '駐車場';
+const kicker = 'PARKING · 2026 目安';
+const heroTitle = '大洗海浜公園の駐車場';
+const heroSubtitle = 'どこに停めるか、いつ有料か、いくらか。来訪前に確認したい基本をまとめました。';
+
+const faqs = [
+  {
+    q: '駐車料金はいくらですか？',
+    a: '公園内・サンビーチ周辺の指定駐車場は、2026年の指定料金日において普通車（軽・小型・乗用）が1,000円の目安です。料金の徴収は7:00–15:00の時間帯に行われることが多いですが、年度や日にちによって異なります。最新の金額と期間は大洗観光協会の発表でご確認ください。',
+  },
+  {
+    q: 'いつなら無料で停められますか？',
+    a: '指定料金日以外の日、および指定日でも料金徴収時間（目安7:00–15:00）の前後は無料で利用できる場合が多いです。ただし、ゴールデンウィークや海水浴シーズン、花火・大型イベント等の特別な日は運用が変わることがあるため、来訪前に最新案内を確認してください。',
+  },
+  {
+    q: '駐車場はどこにありますか？',
+    a: '大洗海浜公園内の芝生広場・遊具・トイレに近い区画と、隣接する大洗サンビーチ側の駐車場があります。いずれも大洗駅から車で数分の海側エリアです。実際の入口・空き状況はGoogleマップ等のナビをご利用ください。',
+  },
+  {
+    q: '満車のときはどうすればいいですか？',
+    a: '海水浴期間、花火・大型イベント、連休は早朝から満車になりやすいです。その際は周辺の別の町営・公営駐車場をさがすか、大洗駅から徒歩（約18–20分）や町内循環バス「海遊号」などの公共交通の利用を検討すると安心です。',
+  },
+  {
+    q: 'バリアフリー対応や大型車は大丈夫ですか？',
+    a: '公園内の駐車区画には多機能・バリアフリー対応のトイレに近い場所も含まれます。車いすやベビーカーでの移動を考えた方は、入口近くの平坦な区画を狙うと便利です。大型車やマイクロバス等は駐車可能台数・区画に限りがあるため、事前に大洗町や観光協会へお問い合わせください。',
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+
+<TopicLayout
+  title={title}
+  description={description}
+  pageName={pageName}
+  kicker={kicker}
+  heroTitle={heroTitle}
+  heroSubtitle={heroSubtitle}
+  jsonLd={faqLd}
+>
+  <section class="topic-section">
+    <div class="section-shell">
+      <div class="section-heading-row">
+        <div>
+          <div class="section-kicker">PARKING AT A GLANCE</div>
+          <h2 class="section-title">駐車場の基本情報</h2>
+        </div>
+        <p class="section-lead">2026年の指定料金日の目安です。運用は変更され得るため、直前の公式案内でご確認ください。</p>
+      </div>
+
+      <div class="info-table-wrap">
+        <table class="info-table">
+          <thead>
+            <tr><th scope="col">項目</th><th scope="col">内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">駐車場</th><td>大洗海浜公園内駐車場（芝生広場・遊具・トイレ近くの区画）、および隣接するサンビーチ側の町営・公営駐車場</td></tr>
+            <tr><th scope="row">普通車の料金</th><td><span class="highlight">指定料金日 1,000円</span>（軽・小型・乗用の目安）</td></tr>
+            <tr><th scope="row">2026年の徴収時間</th><td><span class="highlight">7:00–15:00</span>（日によって異なります）</td></tr>
+            <tr><th scope="row">2026年の料金日</th><td>3月–10月の週末・祝日、ゴールデンウィーク、海水浴期間などの指定日（詳細は公式発表をご確認ください）</td></tr>
+            <tr><th scope="row">地図・ナビ</th><td><a href={mapsDirectionsUrl} target="_blank" rel="noopener noreferrer">Google マップで駐車場の入口へナビ↗</a></td></tr>
+            <tr><th scope="row">公式情報</th><td><a href={officialParkingUrl} target="_blank" rel="noopener noreferrer">大洗観光協会｜2026年 駐車料金のお知らせ↗</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="info-note">※ 上記は2026年の目安です。料金・期間・運用は年や天候・イベント等で変更されることがあります。最新の案内は大洗観光協会・大洗町の公式発表で来訪前にご確認ください。</p>
+    </div>
+  </section>
+
+  <section class="topic-section alt">
+    <div class="section-shell">
+      <div class="section-heading-row">
+        <div>
+          <div class="section-kicker">DETAILS</div>
+          <h2 class="section-title">もう少し詳しく</h2>
+        </div>
+      </div>
+      <p class="topic-intro">大洗海浜公園と大洗サンビーチは海辺で一続きになっており、周辺には町営・公営の駐車場が複数整備されています。公園内の区画は芝生広場や遊具、トイレに近く、親子連れやバリアフリー利用にも配慮しやすい位置にあります。</p>
+      <p class="topic-intro">料金は、海水浴期間やゴールデンウィーク、花火・大型イベントなどの「指定料金日」に徴収される仕組みです。指定日以外、あるいは徴収時間の前後は無料で利用できることが多いですが、年によって日数や時間帯が変わります。</p>
+      <p class="topic-intro">海水浴シーズンや週末・祝日、イベント日は早朝から満車になりやすいため、時間に余裕を持った来訪か、大洗駅からの徒歩・町内循環バスなどの公共交通の活用をおすすめします。</p>
+
+      <div class="topic-map">
+        <iframe
+          src={mapsEmbedSrc}
+          width="100%"
+          height="450"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          title="大洗海浜公園 駐車場周辺のGoogleマップ"></iframe>
+      </div>
+      <p class="official-link">
+        公式・最新情報は <a href={officialParkingUrl} target="_blank" rel="noopener noreferrer">大洗観光協会（駐車料金のお知らせ）</a> でもご確認いただけます。
+      </p>
+      <div class="topic-cta">
+        <a class="primary-button" href={mapsDirectionsUrl} target="_blank" rel="noopener noreferrer">Google マップでナビを開始</a>
+        <a class="ghost-button" href="/access/">アクセス方法を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="topic-faq">
+    <div class="section-shell">
+      <div class="section-heading-row">
+        <div>
+          <div class="section-kicker">FAQ</div>
+          <h2 class="section-title">よくある質問</h2>
+        </div>
+      </div>
+      <div class="faq-list">
+        {faqs.map((item, index) => (
+          <details open={index === 0}><summary>{item.q}</summary><p>{item.a}</p></details>
+        ))}
+      </div>
+    </div>
+  </section>
+</TopicLayout>
